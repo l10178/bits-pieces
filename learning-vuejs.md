@@ -24,3 +24,15 @@ resolve: {
     }
 }
 ```
+
+为什么官方生成得js不以分号结尾，不应该啊
+
+首先得学习webpack，学习webpack首先得学习4个核心概念
+入口(entry)
+输出(output)
+loader
+插件(plugins)
+常用的：代理
+
+# 插件统计
+* Http： axios
