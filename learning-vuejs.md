@@ -4,6 +4,7 @@
  2. pascal命名法，形如ThisIsAnApple
  3. 下划线命名法，形如this_is_an_apple
  4. 中划线命名法，形如this-is-an-apple
+ 项目中强制使用中划线命名法，this-is-an-apple
 
  用vuejs的webpack模板生成的项目中，router/index.js里面有一句：
  ```js
@@ -25,7 +26,7 @@ resolve: {
 }
 ```
 
-为什么官方生成得js不以分号结尾，不应该啊
+ESLint，使用的标准里，js语句不以分号结尾，感觉好坑啊。
 
 首先得学习webpack，学习webpack首先得学习4个核心概念
 入口(entry)

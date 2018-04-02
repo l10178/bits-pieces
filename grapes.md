@@ -9,3 +9,7 @@ then notes when write grapes project.
 * install phantomjs on ubuntu
 
   sudo apt-get install phantomjs
+
+
+Intellij IDEA 配置ESlint风格和项目一致，比如都使用google标准。
+配置代码换行都使用LF或者CRLF，我们项目中都是LF。
