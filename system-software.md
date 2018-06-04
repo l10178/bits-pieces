@@ -4,10 +4,10 @@
 * Brew
 
 
-#Windows
+# Windows
 * Git Bash
 * Clover
 
 
-#Node.js
+# Node.js
 * [tldr](https://github.com/tldr-pages/tldr-node-client)
