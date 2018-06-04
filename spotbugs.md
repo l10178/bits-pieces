@@ -6,10 +6,12 @@ SpotBugs requires JRE (or JDK) 1.8.0 or later to run. However, it can analyze pr
 
 # Using SpotBugs
 SpotBugs可以直接通过运行spotbugs jar的方式使用，官方还封装好了bat和shell等bin脚本，还可以通过以下几种方式以插件方式运行:
-* [Ant][] 注意使用ant的时候，需要把spotbugs-ant.jar放到ant的lib目录下。
+* [Ant][]
 * [Maven][]
 * [Gradle][]
 * [Eclipse][]
+
+注意使用ant的时候，需要把spotbugs-ant.jar放到ant的lib目录下。
 
 # Bug Descriptions
 SpotBugs 这次是400多种规则检查，详细的描述可参考[这儿](https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html).
