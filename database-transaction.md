@@ -128,3 +128,10 @@ Thanks: http://www.xuebuyuan.com/3247866.html
 2. 设置了readonly后，connection都会被赋予readonly，效果取决于数据库的实现。
 3. 在ORM中，设置了readonly会赋予一些额外的优化，例如在Hibernate中，会被禁止flush等。
 4. 由于只读事务不存在数据的修改，因此数据库将会为只读事务提供一些优化手段，例如Oracle对于只读事务，不启动回滚段，不记录回滚log。
+
+# Spring @Transactional
+用法和概念参考官方文档，注意几点：
+1. @Transactional 只能被应用到public方法上, 对于其它非public的方法,如果标记了@Transactional也不会报错,但方法没有事务功能.
+2. 默认只回滚RuntimeException。其他几个属性默认值也去代码里了解，就不复制粘贴了。
+3. MySQL默认为REPEATABLE_READ级别, SQLSERVER默认为READ_COMMITTED。
+4. 注意仅仅 @Transactional 注解的出现不足于开启事务行为，它仅仅是一种元数据。必须配置启用。需要实际测试一下。
