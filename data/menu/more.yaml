@@ -1,0 +1,10 @@
+---
+more:
+  - name: Releases
+    ref: 'https://github.com/l10178/bits-pieces/releases'
+    external: true
+    icon: 'download'
+  - name: 'View Source'
+    ref: 'https://github.com/l10178/bits-pieces'
+    external: true
+    icon: 'github'
