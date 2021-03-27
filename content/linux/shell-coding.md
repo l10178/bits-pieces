@@ -1,8 +1,16 @@
 ---
-title: 'Shell 编程实用句式'
+title: "Shell 编程实用句式"
 date: 2021-01-29T23:54:37+08:00
 draft: false
 ---
+
+选婿。
+
+```shell
+#!/usr/bin/env bash
+
+#!/usr/bin/bash
+```
 
 检查是否以 root 用户执行。
 
@@ -47,29 +55,6 @@ val=${username_line#*=}
 ```shell
 #trim string by echo
 val_trim=$(echo -n ${val})
-```
-
-解压缩，以下示例请根据文件名后缀自行选择解压缩命令。
-
-```shell
-tar -xf test.tar
-gzip -d test.gz
-gunzip test.gz
-tar -xzf test.tar.gz
-bzip2 -d test.bz2
-bunzip2 test.bz2
-tar -xjf test.tar.bz2
-```
-
-压缩，以下示例请根据需要选择压缩算法。
-
-```shell
-# 将当前目录下所有jpg格式的文件打包为pictures.tar
-tar -cf pictures.tar *.jpg
-# 将Picture目录下所有文件打包并用gzip压缩为pictures.tar.gz
-tar -czf pictures.tar.gz Picture/
-# 将Picture目录下所有文件打包并用bzip2压缩为pictures.tar.bz2
-tar -cjf pictures.tar.bz2 Picture/
 ```
 
 字体输出颜色及终端格式控制
