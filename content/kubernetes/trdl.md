@@ -1,5 +1,5 @@
 ---
-title: 'TL;DR'
+title: "TL;DR"
 date: 2021-01-29T23:54:37+08:00
 draft: false
 ---
@@ -8,10 +8,16 @@ draft: false
 
 ---
 
-复制secret到另一个namespace。
+复制 secret 到另一个 namespace。
 
 ```sh
 kubectl get secret mys --namespace=na -oyaml | grep -v '^\s*namespace:\s' | kubectl apply --namespace=nb -f -
+```
+
+批量删除 pod。
+
+```sh
+kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
 ```
 
 密钥解密。
@@ -20,7 +26,7 @@ kubectl get secret mys --namespace=na -oyaml | grep -v '^\s*namespace:\s' | kube
  kubectl get secret my-creds -n mysql -o jsonpath="{.data.ADMIN_PASSWORD}" | base64 --decode
 ```
 
-Docker保存和导入镜像。
+Docker 保存和导入镜像。
 
 ```sh
 # save image(s)
