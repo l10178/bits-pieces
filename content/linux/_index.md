@@ -1,7 +1,8 @@
 ---
-title: "Linux"
+title: 'Linux'
+description: 'Linux 下工作常用命令、工具、软件总结。'
 date: 2021-01-29T23:54:37+08:00
 draft: false
 ---
 
-Linux 下工作常用命令总结。
+Linux 下工作常用命令、工具、软件总结。
