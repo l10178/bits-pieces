@@ -1,5 +1,5 @@
 ---
-title: 'Superset 对接 ClickHouse 和 keycloak'
+title: 'Superset 对接 ClickHouse'
 date: 2021-03-19T23:54:37+08:00
 draft: false
 ---
