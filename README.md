@@ -10,7 +10,7 @@ I always have a lot of bits and pieces in my coat pocket.
 ## 主要内容
 
 - AIOps 架构选型和技术总结。
-- Kubernetes 常用命令，实战经验。
+- Kubernetes 常用命令，实战经验，CKA 考试。
 - Linux 常用命令，实战经验。
 
 ## License

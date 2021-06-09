@@ -1,4 +1,8 @@
-# 数据库事务
+---
+title: '数据库事务控制'
+date: 2020-12-14T23:54:37+08:00
+draft: false
+---
 
 数据库事务总结，主要包括数据库事务 ACID 属性介绍、数据库并发问题总结、事务传播行为和隔离级别。
 
@@ -298,8 +302,7 @@ public class ApplicationTest {
 }
 ```
 
-@Transactional 注解加在 UserService.save 和 AddressService.save 两个方法上，看下不同的传播形式。
-[![spring-transaction](./spring-transaction.png)](./spring-transaction.png)
+@Transactional 注解加在 UserService.save 和 AddressService.save 两个方法上。
 
 具体的事务开启和关闭流程，设置 spring 的日志级别为 debug 后，运行，可看到类似于这面这样的日志。这里使用了 Spring data jpa，打印的是 JpaTransactionManager 的日志。UserServices 使用的传播行为是 REQUIRED，AddressService 使用 REQUIRES_NEW。
 
