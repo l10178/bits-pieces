@@ -1,10 +1,10 @@
 ---
-title: "History入门"
+title: 'History入门'
 date: 2021-01-29T23:54:37+08:00
 draft: false
 ---
 
-history 命令，用好历史命令提高工作效率。
+Linux 下 history 命令，用好历史命令提高工作效率。
 
 ## 搜索历史命令
 

@@ -12,7 +12,7 @@ Linux 下工作常用命令、工具、软件总结。
 Ubuntu 查询指定软件有多少可用版本:
 
 ```console
-$ apt-cache madison <<package name>>
+apt-cache madison <<package name>>
 ```
 
 安装软件时指定版本号：
@@ -27,8 +27,8 @@ $ apt-cache madison <<package name>>
 ```console
 $ sb_release -a
 No LSB modules are available.
-Distributor ID:	Ubuntu
-Description:	Ubuntu 20.04.2 LTS
-Release:	20.04
-Codename:	focal
+Distributor ID: Ubuntu
+Description: Ubuntu 20.04.2 LTS
+Release: 20.04
+Codename: focal
 ```

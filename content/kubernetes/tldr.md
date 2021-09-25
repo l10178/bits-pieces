@@ -1,5 +1,5 @@
 ---
-title: "TL;DR"
+title: 'TL;DR'
 date: 2021-01-29T23:54:37+08:00
 draft: false
 ---
@@ -18,6 +18,8 @@ kubectl get secret mys --namespace=na -oyaml | grep -v '^\s*namespace:\s' | kube
 
 ```sh
 kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+# Delete by label
+kubectl delete pod -n idaas-book -l app.kubernetes.io/name=idaas-book
 ```
 
 密钥解密。
