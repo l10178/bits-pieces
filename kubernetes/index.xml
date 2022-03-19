@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubernetes on bits-pieces</title><link>https://l10178.github.io/bits-pieces/kubernetes/</link><description>Recent content in Kubernetes on bits-pieces</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 29 Jan 2021 23:54:37 +0800</lastBuildDate><atom:link href="https://l10178.github.io/bits-pieces/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>备考 CKA 过程，CKA 真题</title><link>https://l10178.github.io/bits-pieces/kubernetes/cka/</link><pubDate>Tue, 01 Jun 2021 23:54:37 +0800</pubDate><guid>https://l10178.github.io/bits-pieces/kubernetes/cka/</guid><description>备考 CKA （Certified Kubernetes Administrator）过程，心得，遇见问题，CKA 真题。
+备考环境 备考使用的系统和软件版本如下。
+Ubuntu：20.04 Focal Fossa Kubernetes：1.20.7 kubeadm：1.20.7 安装和使用问题记录 kubeadm 安装问题 安装 kubeadm，国内安装使用阿里镜像源。
+$ cat /etc/apt/sources.list.d/kubernetes.list deb https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial main 踩坑：因为使用的是 ubuntu 20.04，代号 focal，专门去各个代理镜像源找kubernetes-focal都没有找到，后来发现 google 官方根本没发布对应的版本，只有kubernetes-xenial， k8s 官方文档里 ubuntu 也是用的这一个版本。可以用，就用他吧。
+kubeadm init 时指定使用阿里镜像源（解决国内连不上 k8s.gcr.io 的问题）、指定版本号(安装考试对应的版本，不一定是最新版本)。
+通过指定--image-repository，不需要手动下载镜像重新打 tag，kubeadm 自动使用指定的 repository。
+kubeadm init --image-repository=registry.aliyuncs.com/google_containers \ --pod-network-cidr=10.244.0.0/16 \ --kubernetes-version=v1.20.7 解决 scheduler Unhealthy，controller-manager Unhealthy 第一次安装完成后通过 kubectl get cs命令，发现 scheduler Unhealthy，controller-manager Unhealthy。
+$ kubectl get cs NAME STATUS MESSAGE scheduler Unhealthy Get &amp;quot;http://127.</description></item><item><title>TL;DR</title><link>https://l10178.github.io/bits-pieces/kubernetes/tldr/</link><pubDate>Fri, 29 Jan 2021 23:54:37 +0800</pubDate><guid>https://l10178.github.io/bits-pieces/kubernetes/tldr/</guid><description>复制&amp;ndash;粘贴，这就是生活。
+复制 secret 到另一个 namespace。
+kubectl get secret mys --namespace=na -oyaml | grep -v &amp;#39;^\s*namespace:\s&amp;#39; | kubectl apply --namespace=nb -f - 批量删除 pod。
+kubectl get pods --all-namespaces | grep Evicted | awk &amp;#39;{print $2 &amp;#34; --namespace=&amp;#34; $1}&amp;#39; | xargs kubectl delete pod # Delete by label kubectl delete pod -n idaas-book -l app.kubernetes.io/name=idaas-book 密钥解密。
+kubectl get secret my-creds -n mysql -o jsonpath=&amp;#34;{.data.ADMIN_PASSWORD}&amp;#34; | base64 --decode Docker 保存和导入镜像。
+# save image(s) docker save image:tag image2:tag | gzip &amp;gt;xxx.</description></item></channel></rss>
