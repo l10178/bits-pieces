@@ -36,3 +36,15 @@ docker save image:tag image2:tag | gzip >xxx.tar.gz
 # load images
 docker load -i xxx.tar.gz
 ```
+
+合并多个 kube config。
+
+```sh
+export KUBECONFIG=~/.kube/config:~/.kube/anotherconfig
+kubectl config view --flatten > ~/.kube/config-all
+
+cp ~/.kube/config-all ~/.kube/config
+# 顺手把权限改了，避免helm或kubectl客户端warning
+chmod 600 ~/.kube/config
+
+```
