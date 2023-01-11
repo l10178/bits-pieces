@@ -10,4 +10,9 @@ docker save image:tag image2:tag <span class=p>|</span> gzip &gt;xxx.tar.gz
 docker load -i xxx.tar.gz
 </code></pre></div><p>合并多个 kube config。</p><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>KUBECONFIG</span><span class=o>=</span>~/.kube/config:~/.kube/anotherconfig
 kubectl config view --flatten &gt; ~/.kube/config-all
+
+cp ~/.kube/config-all ~/.kube/config
+<span class=c1># 顺手把权限改了，避免helm或kubectl客户端warning</span>
+chmod <span class=m>600</span> ~/.kube/config
+
 </code></pre></div></article><div class="gdoc-page__footer flex flex-wrap justify-between"></div></div></main><footer class=gdoc-footer><div class="container flex flex-wrap"><span class=gdoc-footer__item>Copyright © 2020-2022 <a href=https://www.nxest.com class=gdoc-footer__link>nxest.com</a>.</span></div></footer></div><script defer src=/bits-pieces/js/en.search.min.js></script><script defer src=/bits-pieces/js/clipboard.min.js></script><script>document.addEventListener("DOMContentLoaded",function(event){var clipboard=new ClipboardJS('.clip');});</script></body></html>
