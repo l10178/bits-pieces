@@ -1,12 +1,12 @@
 ---
-title: '从Spring到Spring Cloud迁移升级'
+title: '从Spring到Spring Cloud'
 date: 2023-01-07T10:54:37+08:00
 draft: false
 ---
 
-从 Spring 到 Spring Cloud 迁移升级使用规范和踩坑记录。
+从 Spring 到 Spring Cloud，迁移升级使用指导，以及各种踩坑记录。
 
-## 开发方式
+## 整体目标
 
 日常开发直接 run Spring Boot main 方法启动 embed tomcat，和开源方式一样。
 
@@ -161,7 +161,7 @@ Logback 配置文件统一将 logback.xml 改为 logback-spring.xml，内容约�
 
 日志打印规范。
 
-## 老项目迁移
+## 老项目迁移升级
 
 1. POM 迁移，依赖项可能被开源软件主动提升版本，要注意版本变化。已知的组件会通过 fxiaoke parent 控制。
 2. 原有的 xml 配置，可以改为注解形式，也可以不改直接 import 使用。
@@ -181,6 +181,11 @@ the web.xml file](https://github.com/spring-projects/spring-boot/issues/2175) wh
 
 webapp web.xml 配置如何转移到 spring boot war 形式。
 参考：<https://www.baeldung.com/spring-boot-dispatcherservlet-web-xml>
+
+### JSP
+
+好吧，我们还有 JSP。
+TODO： 404
 
 ### CMS 配置文件迁移方式
 
