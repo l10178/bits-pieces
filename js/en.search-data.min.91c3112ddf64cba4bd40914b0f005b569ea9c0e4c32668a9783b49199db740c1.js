@@ -1,5 +1,5 @@
 "use strict";(function(){const t={};t.doc={id:"id",field:["title","content"],store:["title","href"]};const e=FlexSearch.create(t);window.geekdocSearchIndex=e,e.add({id:0,href:"/bits-pieces/java/spring-boot-micrometer/",title:"Spring Boot 使用 Micrometer 集成 Prometheus 监控",content:`主要内容：
-Micrometer 介绍。 业务如何自定义指标，实现方式和规范。 Micrometer 介绍 Micrometer 为 Java 平台上的性能数据收集提供了一个通用的 API，应用程序只需要使用 Micrometer 的通用 API 来收集性能指标，Micrometer 会负责完成与不同监控系统的适配工作。
+Micrometer 介绍。 业务如何自定义指标，如何接入 Prometheus，实现方式和规范。 Micrometer 介绍 Micrometer 为 Java 平台上的性能数据收集提供了一个通用的 API，应用程序只需要使用 Micrometer 的通用 API 来收集性能指标，Micrometer 会负责完成与不同监控系统的适配工作。
 Micrometer 提供了多种度量指标类型（Timers、Guauges、Counters 等），同时支持接入不同的监控系统，例如 Influxdb、Graphite、Prometheus、OTLP 等。
 从 Spring Boot 2.x 开始使用 Micrometer 作为默认的监控门面接口， Think SLF4J, but for observability 。
 Micrometer 核心概念 Micrometer 中两个最核心的概念：计量器注册表 (MeterRegistry)，计量器 (Meter)。
