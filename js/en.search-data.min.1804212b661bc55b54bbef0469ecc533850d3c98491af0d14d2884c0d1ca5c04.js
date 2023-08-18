@@ -18,14 +18,14 @@ apiVersion: monitoring.coreos.com/v1 kind: ServiceMonitor metadata: labels: app.
 @Configuration public class MicrometerAspectConfiguration { @Bean public CountedAspect countedAspect(MeterRegistry registry) { return new CountedAspect(registry); } @Bean public TimedAspect timedAspect(MeterRegistry registry) { return new TimedAspect(registry); } } 为了方便大家使用，已经在我们的 starter 里自动注入了以上 Bean，大家只需要引入以下两个 starter。
 &lt;dependency&gt; &lt;groupId&gt;com.fxiaoke.boot&lt;/groupId&gt; &lt;artifactId&gt;metrics-spring-boot-starter&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt; &lt;/dependency&gt; 自定义指标高级配置 Spring 默认注入的 MeterRegistry 是一个 CompositeMeterRegistry，如果想定制可注入自定义 MeterRegistryCustomizer Bean。
 @Configuration public class MicrometerConfiguration { @Bean MeterRegistryCustomizer&lt;MeterRegistry&gt; configurer() { return (registry) -&gt; registry.config() .commonTags(&#34;group&#34;, &#34;sample&#34;) .commonTags(&#34;application&#34;, &#34;sample&#34;); } } 如果只是想为当前应用增加 Tag，可直接通过配置文件增加，示例如下。
-management.metrics.tags.biz=sample management.metrics.tags.application=\${spring.application.name} TODO： Binders、 filters 放开？ 介绍
-自定义指标规范 指标和 Tag 命名约定使用英语句号分隔，全小写，Tag 可根据实际情况使用缩写。
+management.metrics.tags.biz=sample management.metrics.tags.application=\${spring.application.name} 自定义指标规范 指标和 Tag 命名约定使用英语句号分隔，全小写，Tag 可根据实际情况使用缩写。
 指标命名建议以 fs.application.action 为模板，避免与开源或其他项目组冲突。
 注意 Tag values 不能为 Null， 且必须是可枚举的某些固定类型便于统计。
 使用注解@Timed @Counted会默认增加 method、class、result、exception 这几个 Tag，注意不要与之冲突。
 公司和开源默认 Tag 如下，这些会被 ServiceMonitor 强制覆盖，业务不要自己定义。
 namespace、application、service、container、pod、instance、job、endpoint、id 编码中如果需要 MeterRegistry，不允许引用具体实现（比如 Prometheus 的 io.prometheus.client.CollectorRegistry），而是使用 Micrometer 提供的统一接口 MeterRegistry。类比，在打印日志时不允许直接使用 logback 或 log4j api，而是使用 slf4j api.
 不要自己 new MeterRegistry，而是使用自动注入的或静态方法，因为我们可能随时在公司的 starter 增加自定义的配置。
+建议为指标加上 description 字段。
 最佳实践 合理规划 Tag，一个 Meter 具体类型需要通过名字和 Tag 作为它的唯一标识，这样做的好处是可以使用名字进行标记，通过不同的 Tag 去区分多种维度进行数据统计。
 反例 1（全部用 name 区分，无 Tag，重复计量）： Metrics.counter(&#34;fs.sms.all&#34;); Metrics.counter(&#34;fs.sms.aliyun&#34;); Metrics.counter(&#34;fs.sms.huaweiyun&#34;); 正例： Metrics.counter(&#34;fs.sms.send&#34;,&#34;provider&#34;,&#34;ali&#34;); Metrics.counter(&#34;fs.sms.send&#34;,&#34;provider&#34;,&#34;huawei&#34;); 避免无意义不可枚举的 Tag，混乱的 Tag 比无 Tag 更难管理。
 注意事项 注意引入的类名，有很多同名的类，使用 io.micrometer.core 包下的类。 `}),e.add({id:1,href:"/bits-pieces/kubernetes/pid/",title:"容器进程数限制",content:`问题描述：
