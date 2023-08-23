@@ -210,7 +210,7 @@ management.metrics.tags.application=${spring.application.name}
 
 ### 自定义指标规范
 
-1. 指标和 Tag 命名约定使用英语句号分隔，全小写，Tag 可根据实际情况使用缩写。
+1. 指标和 Tag 命名约定使用英语句号分隔，全小写，Tag 可根据实际情况使用缩写。指标名在不同的 MeterRegistry 里会自动转换，比如在 Prometheus 会把 `fs.sms.send` 转换为 `fs_sms_send`。
 2. 指标命名建议以 `fs.application.action` 为模板，避免与开源或其他项目组冲突。
 3. 注意 Tag values 不能为 Null， 且必须是可枚举的某些固定类型便于统计。
 4. 使用注解`@Timed @Counted`会默认增加 `method、class、result、exception` 这几个 Tag，注意不要与之冲突。
