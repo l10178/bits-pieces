@@ -18,7 +18,7 @@ apiVersion: monitoring.coreos.com/v1 kind: ServiceMonitor metadata: labels: app.
 @Configuration public class MicrometerAspectConfiguration { @Bean public CountedAspect countedAspect(MeterRegistry registry) { return new CountedAspect(registry); } @Bean public TimedAspect timedAspect(MeterRegistry registry) { return new TimedAspect(registry); } } 为了方便大家使用，已经在我们的 starter 里自动注入了以上 Bean，大家只需要引入以下两个 starter。
 &lt;dependency&gt; &lt;groupId&gt;com.fxiaoke.boot&lt;/groupId&gt; &lt;artifactId&gt;metrics-spring-boot-starter&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt; &lt;/dependency&gt; 自定义指标高级配置 Spring 默认注入的 MeterRegistry 是一个 CompositeMeterRegistry，如果想定制可注入自定义 MeterRegistryCustomizer Bean。
 @Configuration public class MicrometerConfiguration { @Bean MeterRegistryCustomizer&lt;MeterRegistry&gt; configurer() { return (registry) -&gt; registry.config() .commonTags(&#34;group&#34;, &#34;sample&#34;) .commonTags(&#34;application&#34;, &#34;sample&#34;); } } 如果只是想为当前应用增加 Tag，可直接通过配置文件增加，示例如下。
-management.metrics.tags.biz=sample management.metrics.tags.application=\${spring.application.name} 自定义指标规范 指标和 Tag 命名约定使用英语句号分隔，全小写，Tag 可根据实际情况使用缩写。
+management.metrics.tags.biz=sample management.metrics.tags.application=\${spring.application.name} 自定义指标规范 指标和 Tag 命名约定使用英语句号分隔，全小写，Tag 可根据实际情况使用缩写。指标名在不同的 MeterRegistry 里会自动转换，比如在 Prometheus 会把 fs.sms.send 转换为 fs_sms_send。
 指标命名建议以 fs.application.action 为模板，避免与开源或其他项目组冲突。
 注意 Tag values 不能为 Null， 且必须是可枚举的某些固定类型便于统计。
 使用注解@Timed @Counted会默认增加 method、class、result、exception 这几个 Tag，注意不要与之冲突。
