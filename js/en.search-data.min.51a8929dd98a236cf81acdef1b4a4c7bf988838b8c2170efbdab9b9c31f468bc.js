@@ -144,11 +144,11 @@ cms-spring-cloud-starter 配置中心 starter，类似 spring-cloud-consul/nacos
 使用步骤：
 引入 starter。
 &lt;dependency&gt; &lt;groupId&gt;com.fxiaoke.cloud&lt;/groupId&gt; &lt;artifactId&gt;cms-spring-cloud-starter&lt;/artifactId&gt; &lt;!-- 版本号建议不写，使用 parent 定义好的版本 --&gt; &lt;/dependency&gt; 增加 src/main/resources/application.properties 文件，内容如下。
-# 当前模块名，必填，必须全局唯一，一般和 maven 子模块保持一致 spring.application.name=cms-starter-sample # 配置导入，这一行必须写。但是配置文件本身是否必须是通过 optional 控制的 spring.config.import=optional:cms:\${spring.application.name} 我们使用 spring.config.import 固定格式为 optional:cms:file-name。 optional 表示这个文件可选，配置中心不存在的时候也允许启动，cms 是固定字符代表对接 fs 配置中心。 同时支持多个，多个如果想写在一行，用分号分割。例如：
-spring.config.import=optional:cms:\${spring.application.name};cms:dubbo-common 在 CMS 配置中心创建需要的配置文件，文件名为 spring-cloud-\${spring.application.name}，其中\${spring.application.name}替换成真正的文件名，注意当前版本自动追加了前缀spring-cloud-且不允许修改。
+# 当前模块名，必填，必须全局唯一，一般和 maven 子模块保持一致 spring.application.name=cms-starter-sample # 配置导入，这一行必须写。但是配置文件本身是否必须是通过 optional 控制的 spring.config.import=optional:cms:\${spring.application.name} 我们使用 spring.config.import 固定格式为 optional:cms:file-name。 optional 表示这个文件可选，配置中心不存在的时候也允许启动，cms 是固定字符代表对接 fs 配置中心。
+在 CMS 配置中心创建需要的配置文件，文件名为 spring-cloud-\${spring.application.name}，其中\${spring.application.name}替换成真正的文件名，注意当前版本自动追加了前缀spring-cloud-且不允许修改。
 代码中使用几种方式参考 sample 代码，文档查看 spring 官方ConfigurationProperties和 @Value 说明。
 配置变更后，如果想响应变更事件，实现自己逻辑，自定义类中implements ApplicationListener&lt;RefreshScopeRefreshedEvent&gt;
-配置加解密，在配置中心中有个加密功能框（如果看不到可能是没有权限），先使用本 starter 的秘钥加密（注意：本 starter 使用了单独的秘钥），使用固定格式 ENC（加密后的内容）配置到文件里，在 java 里 get value 就是已经解密后的了。例如：
+配置加解密，在配置中心中有个加密功能框（如果看不到可能是没有权限），先使用本 starter 的秘钥加密，使用固定格式 ENC（加密后的内容）配置到文件里，在 java 里 get value 就是已经解密后的了。例如：
 sample.sensitive=ENC(30E239E0958AF3179C7E8EBA3DF618FD) 响应配置更新：
 对于使用使用 ConfigurationProperties 映射的对象类，从对象中每次 get 的值都是刷新后的。推荐这种方式。
 @Data @Configuration @ConfigurationProperties(prefix = &#34;sample&#34;) public class SampleProperties { private String name; } @RefreshScope + @Value 获取 Value 注解的新值。
