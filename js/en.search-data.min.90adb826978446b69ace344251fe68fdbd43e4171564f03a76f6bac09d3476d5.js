@@ -135,9 +135,9 @@ class SpockMavenBuildCustomizer implements BuildCustomizer&lt;MavenBuild&gt; { @
 主要 starter 使用说明 文档会延后，代码不会骗人，更多说明参考各个项目源码的 README，README 会实时更新。
 fxiaoke-spring-cloud-parent 目前有两个公司级父 pom：
 新：com.fxiaoke.cloud.fxiaoke-spring-cloud-parent 用于 Spring Boot/Cloud 方式开发。 旧：com.fxiaoke.common.fxiaoke-parent-pom 用于原纯 Spring + Tomcat 方式开发。 注意：
-这两个 pom 仍然都会更新，但不是实时同步，新 pom 更新一般比较晚。 旧 pom 区分线上和线下版本，新 pom 目前只有一份并不区分。 Maven 项目 parent 统一使用公司新 parent pom，这里定义了 Spring Boot、Spring Cloud 以及内部定制的各种 support 和 starter 版本号。
+fxiaoke-spring-cloud-parent 导入了 fxiaoke-parent-pom，所以纷享包版本都是一致的，但是三方包比如 spring/netty/okhttp 会随 Spring Boot 版本。 旧 pom 区分线上和线下版本，新 pom 目前只有一份并不区分。 Maven 项目 parent 统一使用公司新 parent pom，这里定义了 Spring Boot、Spring Cloud 以及内部定制的各种 support 和 starter 版本号。
 &lt;parent&gt; &lt;groupId&gt;com.fxiaoke.cloud&lt;/groupId&gt; &lt;artifactId&gt;fxiaoke-spring-cloud-parent&lt;/artifactId&gt; &lt;!-- 注意使用最新版本，可以从脚手架里获取最新版本 --&gt; &lt;version&gt;1.2.0-SNAPSHOT&lt;/version&gt; &lt;relativePath/&gt; &lt;/parent&gt; 主要升级项需关注：
-Spock and Groovy：Spock 由原来的 1.x 升级到 2.x 版本，同时 Groovy 升级到 4.x 版本，Junit4 升级到 Junit5。 已知废弃依赖：
+老项目切换到 Spring Boot 先分析实际生效的 maven dependency，关注下核心包版本是否有大的升级，是否可能对业务造成影响。 Spock and Groovy：Spock 由原来的 1.x 升级到 2.x 版本，同时 Groovy 升级到 4.x 版本，Junit4 升级到 Junit5。 已知废弃依赖：
 废弃项 替代项 说明 javax.annotation-api jakarta.annotation-api 随 spring boot 版本走，且两个包不能共存 spring-boot-starter-actuator 目前强制依赖 spring-boot-starter-actuator，容器镜像里使用它实现健康检查。 另外强制依赖 spring-boot-starter-web，因为有些基础组件依赖了 ServletContext。
 注意： actuator 的引入会带来一些额外收益，之前我们健康检测只检查服务端口是否有响应，而 actuator 默认还额外检查各个中间件的状态，业务方可根据需要自行增加或删除某些中间件的状态到健康检测服务，具体方式和更多高级应用参考 spring-boot-starter-actuator 官方文档。
 cms-spring-cloud-starter 配置中心 starter，类似 spring-cloud-consul/nacos/config，对接配置中心，实现配置文件动态加载、刷新，代替原 ReloadablePropertySourcesPlaceholderConfigurer。
